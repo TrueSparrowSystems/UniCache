@@ -1,0 +1,8 @@
+{
+  "cache": {
+    "engine": "memcached",
+    "servers": ["localhost:11212", "localhost:11213"],
+    "defaultTtl": 60,
+  "consistentBehavior": "1"
+  }
+}

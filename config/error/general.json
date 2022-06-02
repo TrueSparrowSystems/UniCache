@@ -1,0 +1,74 @@
+{
+  "something_went_wrong": {
+    "http_code": "422",
+    "code": "UNPROCESSABLE_ENTITY",
+    "message": "Something went wrong."
+  },
+
+  "missing_cache_key": {
+    "http_code": "422",
+    "code": "UNPROCESSABLE_ENTITY",
+    "message": "Cache key does not exist."
+  },
+
+  "invalid_cache_key": {
+    "http_code": "422",
+    "code": "UNPROCESSABLE_ENTITY",
+    "message": "Cache key validation failed."
+  },
+
+  "invalid_cache_value": {
+    "http_code": "422",
+    "code": "UNPROCESSABLE_ENTITY",
+    "message": "Cache value validation failed."
+  },
+
+  "array_is_invalid_cache_value": {
+    "http_code": "422",
+    "code": "UNPROCESSABLE_ENTITY",
+    "message": "Cache value cannot be array."
+  },
+
+  "cache_keys_non_array": {
+    "http_code": "422",
+    "code": "UNPROCESSABLE_ENTITY",
+    "message": "Cache keys should be an array."
+  },
+
+  "non_numeric_cache_value": {
+    "http_code": "422",
+    "code": "UNPROCESSABLE_ENTITY",
+    "message": "Cache value validation failed."
+  },
+
+  "non_int_cache_value": {
+    "http_code": "422",
+    "code": "UNPROCESSABLE_ENTITY",
+    "message": "Cache value is not an integer."
+  },
+
+  "cache_expiry_nan": {
+    "http_code": "422",
+    "code": "UNPROCESSABLE_ENTITY",
+    "message": "Cache expiry is not a valid number."
+  },
+
+  "flush_all_not_supported": {
+    "http_code": "422",
+    "code": "UNPROCESSABLE_ENTITY",
+    "message": "Flush all Cache Keys can not be supported by In-Memory Cache. Please Restart your service to flush cache."
+  },
+
+  "flush_all_keys_failed": {
+    "http_code": "422",
+    "code": "UNPROCESSABLE_ENTITY",
+    "message": "Flush all Cache Keys failed."
+  },
+
+  "acquire_lock_failed": {
+    "http_code": "422",
+    "code": "UNPROCESSABLE_ENTITY",
+    "message": "Acquire Lock failed. Please try again after sometime."
+  }
+
+}
