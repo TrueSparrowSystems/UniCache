@@ -6,15 +6,19 @@ Cache
 [npm]: https://www.npmjs.com/package/@plgworks/cache
 
 Cache is the central cache implementation for several modules. 
-
 It contains three caching engines. The decision of which caching engine to use is governed while creating the cache object. 
 The caching engines implemented are:
 
-* Memcached
-* Redis
-* In-process (use with single threaded process in development mode only)
+* [Memcached](https://memcached.org/)
+* [Redis](https://redis.io/docs/)
+* In-memory (use with single threaded process in development mode only)
 
-##### Constructor parameters:
+# Install NPM
+```bash
+npm install @plgworks/cache --save
+```
+
+# Initialize
 There is 1 parameter required while creating the cache implementer.
 
 * First parameter is mandatory and it specifies the configuration strategy to be used. An example of the configStrategy is: 
@@ -67,14 +71,7 @@ configStrategy = {
     consistentBehavior: "1"
   }
 }
-````
-
-# Install
-
-```bash
-npm install @plgworks/cache --save
 ```
-
 # Examples:
 
 #### Create Cache Object:
@@ -185,3 +182,29 @@ cacheImplementer.touch('testKey', 10).then(function(cacheResponse){
     }
   });
 ```
+### Running test cases
+##### Set environment variables of particular cache engine for which you want to run the tests.
+```` 
+# For Memcached
+source test/env/memcached.sh
+
+# For Redis 
+source test/env/redis.sh
+
+# For In-memory 
+source test/env/inMemory.sh
+````
+##### Cache engines must be running on the specified ports.
+
+* Memcached (11212,11213,11214,11215)
+````
+memcached -p 11212 -d
+````
+* Redis (6380,6381)
+````
+redis-server --port 6380
+````
+##### Run tests
+````
+./node_modules/.bin/mocha --recursive "./test/*.js"
+````
