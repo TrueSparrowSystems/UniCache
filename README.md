@@ -96,6 +96,7 @@ configStrategy = {
   }
 }
 ```
+Note: To print detailed logs, add `CACHE_DEBUG_ENABLED = '1'` in your env variables.
 ## Examples:
 
 #### Create Cache Object:

@@ -18,10 +18,9 @@ class CoreConstant {
    *
    * @returns {boolean}
    */
-  // TODO - take it from config
   get DEBUG_ENABLED() {
     // eslint-disable-next-line no-process-env
-    return process.env.DEBUG_ENABLED;
+    return process.env.CACHE_DEBUG_ENABLED;
   }
 }
 
