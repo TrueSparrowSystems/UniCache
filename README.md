@@ -12,31 +12,55 @@ The caching engines implemented are:
 * [Memcached](https://memcached.org/)
 * [Redis](https://redis.io/docs/)
 * In-memory (use with single threaded process in development mode only)
+## Why Cache?
+ Implementation method varies according to caching systems. 
+ So implementing different caching systems is always a overhead for developer.
+ Our package solve this problem by providing common wrapper methods for memcached, redis and in-memory caching system.
 
-# Install NPM
+## Prerequisites
+  Required caching engine for the use case must be installed and up.
+ Refer [memcached](https://gist.github.com/tomysmile/ba6c0ba4488ea51e6423d492985a7953) and [redis](https://flaviocopes.com/redis-installation/) installation guide.
+
+## Install NPM
 ```bash
 npm install @plgworks/cache --save
 ```
 
-# Initialize
-There is 1 parameter required while creating the cache implementer.
+## Initialize
 
-* First parameter is mandatory and it specifies the configuration strategy to be used. An example of the configStrategy is: 
+#### Cache Initialization Params
+**`configStrategy`** is a mandatory parameter which specifies the configuration strategy to be used for a particular cache engine.
+ An example of the configStrategy is:
 ```js
 configStrategy = {
   cache: {
-      engine: "none/redis/memcache"
+    engine: "none/redis/memcached",
+    host: "",
+    port: "",
+    password: "",
+    enableTsl: "",
+    defaultTtl: 10000,
+    consistentBehavior: "",
+    servers:[],
+    namespace: ""
   }
 };
 ```
+- **engine**: redis, memcached are different types of caching engine. For in-memory cache engine parameter will be `none`. 
+- **host**: Host of the redis caching engine.
+- **port**: Port on which redis caching engine is running.
+- **password**: Redis caching engine password.
+- **enableTsl**: This field is used to enable tsl.
+- **defaultTtl**: Default cache expiry time in sec.
+- **consistentBehavior**: This field is required to create cache instance key.
+- **servers**: servers is an array of memcached servers.
+- **namespace**: It is in-memory cache namespace.
 
-<b>Below are the examples:</b>
+
+<b>Below are the examples of configStrategies:</b>
+* Redis 
+
 ```js
-// import the cache module
-const cache = require('@plgworks/cache');
-```
-```js
-// configStrategy for redis engine
 configStrategy = {
   cache: {
     engine: "redis",
@@ -49,9 +73,9 @@ configStrategy = {
   }
 }
 ````
+* Memcached 
 
 ```js
-// configStrategy for memcached engine
 configStrategy = {
   cache: {
     engine: "memcached",
@@ -61,8 +85,8 @@ configStrategy = {
   }
 }
 ````
+* In-memory 
 ```js
-// configStrategy for in-memory engine
 configStrategy = {
   cache: {
     engine: "none",
@@ -72,7 +96,7 @@ configStrategy = {
   }
 }
 ```
-# Examples:
+## Examples:
 
 #### Create Cache Object:
 
@@ -182,27 +206,30 @@ cacheImplementer.touch('testKey', 10).then(function(cacheResponse){
     }
   });
 ```
-### Running test cases
+## Running test cases
 ##### Set environment variables of particular cache engine for which you want to run the tests.
-```` 
-# For Memcached
-source test/env/memcached.sh
 
-# For Redis 
+* Redis
+````
 source test/env/redis.sh
-
-# For In-memory 
+````
+* Memcached
+```` 
+source test/env/memcached.sh
+````
+* In-memory 
+````
 source test/env/inMemory.sh
 ````
 ##### Cache engines must be running on the specified ports.
 
-* Memcached (11212,11213,11214,11215)
-````
-memcached -p 11212 -d
-````
 * Redis (6380,6381)
 ````
 redis-server --port 6380
+````
+* Memcached (11212,11213,11214,11215)
+````
+memcached -p 11212 -d
 ````
 ##### Run tests
 ````
