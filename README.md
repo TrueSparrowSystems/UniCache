@@ -1,34 +1,35 @@
-Cache
-============
+#Cache
+
 [![Latest version](https://img.shields.io/npm/v/@plgworks/cache.svg?maxAge=3600)][npm]
 [![Downloads per month](https://img.shields.io/npm/dm/@plgworks/cache.svg?maxAge=3600)][npm]
 
 [npm]: https://www.npmjs.com/package/@plgworks/cache
 
-Cache is the central cache implementation for several modules. 
+Cache is the central cache implementation module for several modules. 
 It contains three caching engines. The decision of which caching engine to use is governed while creating the cache object. 
 The caching engines implemented are:
 
 * [Memcached](https://memcached.org/)
 * [Redis](https://redis.io/docs/)
 * In-memory (use with single threaded process in development mode only)
+
 ## Why Cache?
- Implementation method varies according to caching systems. 
- So implementing different caching systems is always a overhead for developer.
- Our package solve this problem by providing common wrapper methods for memcached, redis and in-memory caching system.
+ Core packages of different caching systems do not have a common interface, i.e. they have the same functionality implemented with different method signatures.
+ Thus changing from one cache system to another becomes difficult as all the usages need to be revisited.
+ This NPM package solves the problem by providing common wrapper methods for memcached, redis and in-memory caching systems.
 
 ## Prerequisites
   Required caching engine for the use case must be installed and up.
- Refer [memcached](https://gist.github.com/tomysmile/ba6c0ba4488ea51e6423d492985a7953) and [redis](https://flaviocopes.com/redis-installation/) installation guide.
+ Refer [memcached](https://memcached.org/) and [redis](https://redis.io/docs/getting-started/installation/) installation guide.
 
-## Install NPM
-```bash
+## Installion
+```shell script
 npm install @plgworks/cache --save
 ```
 
 ## Initialize
 
-#### Cache Initialization Params
+### Cache Initialization Params
 **`configStrategy`** is a mandatory parameter which specifies the configuration strategy to be used for a particular cache engine.
  An example of the configStrategy is:
 ```js
@@ -96,10 +97,8 @@ configStrategy = {
   }
 }
 ```
-Note: To print detailed logs, add `CACHE_DEBUG_ENABLED = '1'` in your env variables.
-## Examples:
 
-#### Create Cache Object:
+### Create Cache Object:
 
 ```js
 Cache = require('@plgworks/cache');
@@ -107,95 +106,59 @@ cache = Cache.getInstance(configStrategy);
 
 cacheImplementer = cache.cacheInstance;
 ```
+Note: To print detailed logs, add `CACHE_DEBUG_ENABLED = '1'` in your env variables.
 
-#### Store and retrieve data in cache using `set` and `get`:
+## Examples:
 
-```js
-cacheImplementer.set('testKey', 'testValue', 5000).then(function(cacheResponse){
-    if (cacheResponse.isSuccess()) {
-      console.log(cacheResponse.data.response);
-    } else {
-      console.log(cacheResponse);
-    }
-  });
-cacheImplementer.get('testKey').then(function(cacheResponse){
-    if (cacheResponse.isSuccess()) {
-      console.log(cacheResponse.data.response);
-    } else {
-      console.log(cacheResponse);
-    }
-  });
-```
-
-#### Manage objects in cache using `setObject` and `getObject`:
+### Store and retrieve data in cache using `set` and `get`:
 
 ```js
-cacheImplementer.setObject('testObjKey', {dataK1: 'a', dataK2: 'b'}).then(function(cacheResponse){
-    if (cacheResponse.isSuccess()) {
-      console.log(cacheResponse.data.response);
-    } else {
-      console.log(cacheResponse);
-    }
-  });
-cacheImplementer.getObject('testObjKey').then(function(cacheResponse){
-    if (cacheResponse.isSuccess()) {
-      console.log(cacheResponse.data.response);
-    } else {
-      console.log(cacheResponse);
-    }
-  });
+const resolvePromise = function(cacheResponse){
+                           if (cacheResponse.isSuccess()) {
+                             console.log(cacheResponse.data.response);
+                           } else {
+                             console.log(cacheResponse);
+                           }
+                         };
+
+cacheImplementer.set('testKey', 'testValue', 5000).then(resolvePromise);
+
+cacheImplementer.get('testKey').then(resolvePromise);
 ```
 
-#### Retrieve multiple cache data using `multiGet`:
+### Manage objects in cache using `setObject` and `getObject`:
 
-###### * <b>NOTE: Redis returns null from `multiGet` for objects, even if a value is set in the cache; the other caching engines match this behaviour.</b>
+```js
+cacheImplementer.setObject('testObjKey', {dataK1: 'a', dataK2: 'b'}).then(resolvePromise);
+cacheImplementer.getObject('testObjKey').then(resolvePromise);
+```
+
+### Retrieve multiple cache data using `multiGet`:
+
+<b>NOTE: Redis returns null from `multiGet` for objects, even if a value is set in the cache. The other caching implementers match this behaviour.</b>
 
 ```js
 cacheImplementer.set('testKeyOne', 'One').then(console.log);
 cacheImplementer.set('testKeyTwo', 'Two').then(console.log);
-cacheImplementer.multiGet(['testKeyOne', 'testKeyTwo']).then(function(cacheResponse){
-    if (cacheResponse.isSuccess()) {
-      console.log(cacheResponse.data.response);
-    } else {
-      console.log(cacheResponse);
-    }
-  });
+cacheImplementer.multiGet(['testKeyOne', 'testKeyTwo']).then(resolvePromise);
 ```
 
-#### Delete cache using `del`:
+### Delete cache using `del`:
 
 ```js
 cacheImplementer.set('testKey', 'testValue').then(console.log);
-cacheImplementer.del('testKey').then(function(cacheResponse){
-    if (cacheResponse.isSuccess()) {
-      console.log(cacheResponse.data.response);
-    } else {
-      console.log(cacheResponse);
-    }
-  });
+cacheImplementer.del('testKey').then(resolvePromise);
 ```
 
-#### Manage counters in cache using `increment` and `decrement`: 
+### Manage counters in cache using `increment` and `decrement`: 
 
 ```js
 cacheImplementer.set('testCounterKey', 1).then(console.log);
-cacheImplementer.increment('testCounterKey', 10).then(function(cacheResponse){
-    if (cacheResponse.isSuccess()) {
-      console.log(cacheResponse.data.response);
-    } else {
-      console.log(cacheResponse);
-    }
-  });
-cacheImplementer.decrement('testCounterKey', 5).then(function(cacheResponse){
-    if (cacheResponse.isSuccess()) {
-      console.log(cacheResponse.data.response);
-    } else {
-      console.log(cacheResponse);
-    }
-  });
+cacheImplementer.increment('testCounterKey', 10).then(resolvePromise);
+cacheImplementer.decrement('testCounterKey', 5).then(resolvePromise);
 ```
 
-#### Change the cache expiry time using `touch`:
+### Change the cache expiry time using `touch`:
 
 ```js
 cacheImplementer.set('testKey', "testData").then(console.log);
@@ -207,8 +170,9 @@ cacheImplementer.touch('testKey', 10).then(function(cacheResponse){
     }
   });
 ```
+
 ## Running test cases
-##### Set environment variables of particular cache engine for which you want to run the tests.
+### Set environment variables of particular cache engine for which you want to run the tests.
 
 * Redis
 ````
@@ -222,7 +186,7 @@ source test/env/memcached.sh
 ````
 source test/env/inMemory.sh
 ````
-##### Cache engines must be running on the specified ports.
+### Cache engines must be running on the specified ports.
 
 * Redis (6380,6381)
 ````
@@ -232,7 +196,7 @@ redis-server --port 6380
 ````
 memcached -p 11212 -d
 ````
-##### Run tests
+### Run tests
 ````
 ./node_modules/.bin/mocha --recursive "./test/*.js"
 ````
