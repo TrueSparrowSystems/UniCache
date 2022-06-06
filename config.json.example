@@ -1,0 +1,28 @@
+//{
+//  "engine": "memcached",
+//  "servers": [
+//    "127.0.0.1:11211"
+//  ],
+//  "defaultTtl": 36000,
+//  "consistentBehavior": "1"
+//}
+
+
+//{
+//  "engine": "redis",
+//  "host": "localhost",
+//  "port": "6830",
+//  "password": "dsdsdsd",
+//  "enableTsl": "0",
+//  "defaultTtl": 36000,
+//  "consistentBehavior": "1"
+//}
+
+
+//{
+//  "engine": "none",
+//  "namespace": "pk_sdsd",
+//  "defaultTtl": 36000,
+//  "consistentBehavior": "1"
+//}
+
