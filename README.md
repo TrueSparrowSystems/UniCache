@@ -1,7 +1,6 @@
 # Cache
 
 [![Latest version](https://img.shields.io/npm/v/@plgworks/cache.svg?maxAge=3600)][npm]
-[![Downloads per month](https://img.shields.io/npm/dm/@plgworks/cache.svg?maxAge=3600)][npm]
 
 [npm]: https://www.npmjs.com/package/@plgworks/cache
 
