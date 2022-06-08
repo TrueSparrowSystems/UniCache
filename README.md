@@ -5,13 +5,8 @@
 
 [npm]: https://www.npmjs.com/package/@plgworks/cache
 
-Cache is the central cache implementation module for several modules. 
-It contains three caching engines. The decision of which caching engine to use is governed while creating the cache object. 
-The caching engines implemented are:
-
-* [Memcached](https://memcached.org/)
-* [Redis](https://redis.io/docs/)
-* In-memory (use with single threaded process in development mode only)
+Cache NPM implements wrapper over multiple caching engines - [Memcached](https://memcached.org/), [Redis](https://redis.io/docs/) and In-memory (use with single threaded process in development mode only).
+The decision of which caching engine to use is governed while creating the Cache NPM object. 
 
 ## Why Cache?
  Core packages of different caching systems do not have a common interface, i.e. they have the same functionality implemented with different method signatures.
@@ -29,9 +24,21 @@ npm install @plgworks/cache --save
 
 ## Initialize
 
-### Cache Initialization Params
+```js
+const Cache = require('@plgworks/cache');
+
+const configStrategy = {}; // Refer the next section for detailed documentation on configStrategy
+const cache = Cache.getInstance(configStrategy);
+
+const cacheImplementer = cache.cacheInstance;
+```
+
+**Note**: To print detailed logs, add `CACHE_DEBUG_ENABLED = '1'` in your env variables.
+
+### Config Strategy
 **`configStrategy`** is a mandatory parameter which specifies the configuration strategy to be used for a particular cache engine.
- An example of the configStrategy is:
+
+An example of the configStrategy is:
 ```js
 configStrategy = {
   cache: {
@@ -58,9 +65,8 @@ configStrategy = {
 - **namespace**: It is in-memory cache namespace.
 
 
-<b>Below are the examples of configStrategies:</b>
-* Redis 
-
+#### Redis Example
+Following is an example of redis engine config strategy to be used in initializing Cache.
 ```js
 configStrategy = {
   cache: {
@@ -74,8 +80,8 @@ configStrategy = {
   }
 }
 ````
-* Memcached 
-
+#### Memcache Example
+Following is an example of memcache engine config strategy to be used in initializing Cache.
 ```js
 configStrategy = {
   cache: {
@@ -86,7 +92,8 @@ configStrategy = {
   }
 }
 ````
-* In-memory 
+#### In-memory Example
+Following is an example of in-memory engine config strategy to be used in initializing Cache.
 ```js
 configStrategy = {
   cache: {
@@ -98,20 +105,10 @@ configStrategy = {
 }
 ```
 
-### Create Cache Object:
-
-```js
-Cache = require('@plgworks/cache');
-cache = Cache.getInstance(configStrategy);
-
-cacheImplementer = cache.cacheInstance;
-```
-Note: To print detailed logs, add `CACHE_DEBUG_ENABLED = '1'` in your env variables.
-
-## Examples:
+## `cacheImplementer` methods
+Irrespective of the caching engine, the methods exposed in `cacheImplementer` have the consistent signature.
 
 ### Store and retrieve data in cache using `set` and `get`:
-
 ```js
 const resolvePromise = function(cacheResponse){
                            if (cacheResponse.isSuccess()) {
@@ -162,13 +159,7 @@ cacheImplementer.decrement('testCounterKey', 5).then(resolvePromise);
 
 ```js
 cacheImplementer.set('testKey', "testData").then(console.log);
-cacheImplementer.touch('testKey', 10).then(function(cacheResponse){
-    if (cacheResponse.isSuccess()) {
-      console.log(cacheResponse.data.response);
-    } else {
-      console.log(cacheResponse);
-    }
-  });
+cacheImplementer.touch('testKey', 10).then(resolvePromise);
 ```
 
 ## Running test cases
