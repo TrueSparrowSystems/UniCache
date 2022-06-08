@@ -39,7 +39,7 @@ const cacheImplementer = cache.cacheInstance;
 
 An example of the configStrategy is:
 ```js
-configStrategy = {
+const configStrategy = {
   cache: {
     engine: "none/redis/memcached",
     host: "",
@@ -67,7 +67,7 @@ configStrategy = {
 #### Redis Example
 Following is an example of redis engine config strategy to be used in initializing Cache.
 ```js
-configStrategy = {
+const configStrategy = {
   cache: {
     engine: "redis",
     host: "localhost",
@@ -82,7 +82,7 @@ configStrategy = {
 #### Memcache Example
 Following is an example of memcache engine config strategy to be used in initializing Cache.
 ```js
-configStrategy = {
+const configStrategy = {
   cache: {
     engine: "memcached",
     servers: ["127.0.0.1:11211"],
@@ -94,7 +94,7 @@ configStrategy = {
 #### In-memory Example
 Following is an example of in-memory engine config strategy to be used in initializing Cache.
 ```js
-configStrategy = {
+const configStrategy = {
   cache: {
     engine: "none",
     namespace: "A",
@@ -165,28 +165,28 @@ cacheImplementer.touch('testKey', 10).then(resolvePromise);
 ### Set environment variables of particular cache engine for which you want to run the tests.
 
 * Redis
-````
+```shell script
 source test/env/redis.sh
-````
+```
 * Memcached
-```` 
+```shell script
 source test/env/memcached.sh
-````
+```
 * In-memory 
-````
+```shell script
 source test/env/inMemory.sh
-````
+```
 ### Cache engines must be running on the specified ports.
 
 * Redis (6380,6381)
-````
+```shell script
 redis-server --port 6380
-````
+```
 * Memcached (11212,11213,11214,11215)
-````
+```shell script
 memcached -p 11212 -d
-````
+```
 ### Run tests
-````
+```shell script
 ./node_modules/.bin/mocha --recursive "./test/*.js"
-````
+```
