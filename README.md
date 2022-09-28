@@ -13,7 +13,7 @@ Core packages of different caching systems do not have a common interface, i.e. 
 Moreover, they have differences in implementation behaviour too. Thus changing from one cache engine to another becomes difficult as all the usages need to be revisited.
 PLG Works Cache solves the problem by providing common wrapper methods for memcached, redis and in-memory caching engines.
 
-Also, you do not need to worry breaking changes of the core packages between their major updates as PLG Works Cache will handle them.
+Also, you do not need to worry about breaking changes of the core packages between their major updates as PLG Works Cache will handle them.
 
 ## Prerequisites
 - [Node.js](https://nodejs.org/en/) (>= version 6)
@@ -29,14 +29,28 @@ npm install @plgworks/cache --save
 ```
 
 ## Initialize
+While using the package, create a singleton object of PLG Works Cache and then use it across the application. Example snippet for the PLG Works Cache singleton object is given below.
 
 ```js
-const Cache = require('@plgworks/cache');
+const PLGWorksCache = require('@plgworks/cache');
 
-const configStrategy = {}; // Refer the next section for detailed documentation on configStrategy
-const cache = Cache.getInstance(configStrategy);
+const configStrategy = {
+  cache: {
+    engine: "none/redis/memcached",
+    // Other keys depend on the engine, refer next section for the same.
+  }
+};
 
-const cacheImplementer = cache.cacheInstance;
+module.exports = PLGWorksCache.getInstance(configStrategy);
+```
+
+The singleton object can be used as given below. 
+```js
+const cacheProvider = require('path-to-your-plg_works_cache-singleton-provider');
+const cacheImplementer = cacheProvider.cacheInstance;
+
+cacheImplementer.set('testKey', 'testValue', 5000);
+cacheImplementer.get('testKey');
 ```
 
 **Note**: To print detailed logs, add `CACHE_DEBUG_ENABLED = '1'` in your env variables.
@@ -54,16 +68,6 @@ const configStrategy = {
   }
 };
 ```
-- **engine**: redis, memcached are different types of caching engine. For in-memory cache engine parameter will be `none`. 
-- **host**: Host of the redis caching engine.
-- **port**: Port on which redis caching engine is running.
-- **password**: Redis caching engine password.
-- **enableTsl**: This field is used to enable tsl.
-- **defaultTtl**: Default cache expiry time in sec.
-- **consistentBehavior**: This field is required to create cache instance key.
-- **servers**: servers is an array of memcached servers.
-- **namespace**: It is in-memory cache namespace.
-
 
 #### Redis Config Strategy
 Following is the redis engine config strategy to be used in initializing PLG Works Cache.
@@ -72,7 +76,7 @@ const configStrategy = {
   cache: {
     engine: "redis",
     host: "localhost",
-    port: "6830",
+    port: "6380",
     password: "dsdsdsd",
     enableTsl: "0",
     defaultTtl: 36000,
@@ -80,6 +84,14 @@ const configStrategy = {
   }
 }
 ````
+- **engine**: redis caching engine to be used. 
+- **host**: Host of the redis caching engine.
+- **port**: Port on which redis caching engine is running.
+- **password**: Redis caching engine password.
+- **enableTsl**: This field is used to enable tsl.
+- **defaultTtl**: Default cache expiry time in sec.
+- **consistentBehavior**: This field is required to create cache instance key.
+
 #### Memcache Config Strategy
 Following is the memcache engine config strategy to be used in initializing PLG Works Cache.
 ```js
@@ -92,6 +104,11 @@ const configStrategy = {
   }
 }
 ````
+- **engine**: memcached caching engine to be used. 
+- **servers**: servers is an array of memcached servers.
+- **defaultTtl**: Default cache expiry time in sec.
+- **consistentBehavior**: This field is required to create cache instance key.
+
 #### In-Memory Config Strategy
 Following is the in-memory engine config strategy to be used in initializing PLG Works Cache.
 ```js
@@ -104,6 +121,10 @@ const configStrategy = {
   }
 }
 ```
+- **engine**: For in-memory cache engine parameter will be `none`. 
+- **namespace**: It is in-memory cache namespace.
+- **defaultTtl**: Default cache expiry time in sec.
+- **consistentBehavior**: This field is required to create cache instance key.
 
 ## `cacheImplementer` methods
 Irrespective of the caching engine, the methods exposed in `cacheImplementer` have the consistent signature.
@@ -162,7 +183,7 @@ cacheImplementer.set('testKey', "testData").then(console.log);
 cacheImplementer.touch('testKey', 10).then(resolvePromise);
 ```
 
-## Running test cases
+## Running Test Cases
 ### Set environment variables of particular cache engine for which you want to run the tests.
 
 * Redis
