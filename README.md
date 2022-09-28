@@ -23,7 +23,7 @@ Follow the installation guides to get the caching engines up and running:
 - [Memcached installation guide](https://memcached.org/)
 - [Redis installation guide](https://redis.io/docs/getting-started/installation/)
 
-## Installation
+## Install NPM
 ```shell script
 npm install @plgworks/cache --save
 ```
@@ -42,21 +42,15 @@ const cacheImplementer = cache.cacheInstance;
 **Note**: To print detailed logs, add `CACHE_DEBUG_ENABLED = '1'` in your env variables.
 
 ### Config Strategy
-**`configStrategy`** is a mandatory parameter which specifies the configuration strategy to be used for a particular cache engine.
+**`configStrategy`** is a mandatory parameter which specifies the configuration strategy to be used for the cache engine.
+Using the `engine` property, you can select which caching engine to use.
 
 An example of the configStrategy is:
 ```js
 const configStrategy = {
   cache: {
     engine: "none/redis/memcached",
-    host: "",
-    port: "",
-    password: "",
-    enableTsl: "",
-    defaultTtl: 10000,
-    consistentBehavior: "",
-    servers:[],
-    namespace: ""
+    // other keys depend on the engine.
   }
 };
 ```
@@ -71,8 +65,8 @@ const configStrategy = {
 - **namespace**: It is in-memory cache namespace.
 
 
-#### Redis Example
-Following is an example of redis engine config strategy to be used in initializing Cache.
+#### Redis Config Strategy
+Following is the redis engine config strategy to be used in initializing PLG Works Cache.
 ```js
 const configStrategy = {
   cache: {
@@ -86,8 +80,8 @@ const configStrategy = {
   }
 }
 ````
-#### Memcache Example
-Following is an example of memcache engine config strategy to be used in initializing Cache.
+#### Memcache Config Strategy
+Following is the memcache engine config strategy to be used in initializing PLG Works Cache.
 ```js
 const configStrategy = {
   cache: {
@@ -98,8 +92,8 @@ const configStrategy = {
   }
 }
 ````
-#### In-memory Example
-Following is an example of in-memory engine config strategy to be used in initializing Cache.
+#### In-Memory Config Strategy
+Following is the in-memory engine config strategy to be used in initializing PLG Works Cache.
 ```js
 const configStrategy = {
   cache: {
