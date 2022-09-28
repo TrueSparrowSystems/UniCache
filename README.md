@@ -1,22 +1,29 @@
-# Cache
+# PLG Works Cache
 
 [![Latest version](https://img.shields.io/npm/v/@plgworks/cache.svg?maxAge=3600)][npm]
 
 [npm]: https://www.npmjs.com/package/@plgworks/cache
 
-Cache NPM implements wrapper over multiple caching engines - [Memcached](https://memcached.org/), [Redis](https://redis.io/docs/) and In-memory (use with single threaded process in development mode only).
-The decision of which caching engine to use is governed while creating the Cache NPM object. 
+PLG Works Cache is a NPM package that provides a wrapper over caching engines - [Memcached](https://memcached.org/) 
+and [Redis](https://redis.io/docs/). Moreover, it provides in-memory caching functionality (utilizing memory on a machine).
+All these 3 flavours of caching engines are exposed implementing consistent interface and behaviour.
 
-## Why Cache?
- Core packages of different caching systems do not have a common interface, i.e. they have the same functionality implemented with different method signatures.
- Thus changing from one cache system to another becomes difficult as all the usages need to be revisited.
- This NPM package solves the problem by providing common wrapper methods for memcached, redis and in-memory caching systems.
+## Why to use PLG Works Cache?
+Core packages of different caching systems do not have a common interface, i.e. they have the same functionality implemented with different method signatures.
+Moreover, they have differences in implementation behaviour too. Thus changing from one cache engine to another becomes difficult as all the usages need to be revisited.
+PLG Works Cache solves the problem by providing common wrapper methods for memcached, redis and in-memory caching engines.
+
+Also, you do not need to worry breaking changes of the core packages between their major updates as PLG Works Cache will handle them.
 
 ## Prerequisites
-  Required caching engine for the use case must be installed and up.
- Refer [memcached](https://memcached.org/) and [redis](https://redis.io/docs/getting-started/installation/) installation guide.
+- [Node.js](https://nodejs.org/en/) (>= version 6)
+- [NPM](https://www.npmjs.com/package/npm)
 
-## Installion
+Follow the installation guides to get the caching engines up and running:
+- [Memcached installation guide](https://memcached.org/)
+- [Redis installation guide](https://redis.io/docs/getting-started/installation/)
+
+## Installation
 ```shell script
 npm install @plgworks/cache --save
 ```
