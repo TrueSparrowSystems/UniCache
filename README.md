@@ -184,7 +184,26 @@ cacheImplementer.touch('testKey', 10).then(resolvePromise);
 ```
 
 ## Running Test Cases
-### Set environment variables of particular cache engine for which you want to run the tests.
+The same test cases will run for each of the caching engines. There are 3 steps in running test cases for a specific caching engine.
+
+### Step 1: Start Cache engine
+This step is only applicable to Memcached or Redis. Run the command specific to the caching engine on which you want to run the test cases.
+
+* Start Redis on 2 ports - 6380 and 6381 as needed by the test cases.
+```shell script
+redis-server --port 6380
+redis-server --port 6381
+```
+* Start Memcached on 4 ports - 11212,11213,11214 and 11215 as needed by the test cases.
+```shell script
+memcached -p 11212 -d
+memcached -p 11213 -d
+memcached -p 11214 -d
+memcached -p 11215 -d
+```
+
+### Step 2: Set caching engine specific environment variables
+In a fresh shell, run one of the following `source` commands, specific to the caching engine.
 
 * Redis
 ```shell script
@@ -198,17 +217,9 @@ source test/env/memcached.sh
 ```shell script
 source test/env/inMemory.sh
 ```
-### Cache engines must be running on the specified ports.
 
-* Redis (6380,6381)
-```shell script
-redis-server --port 6380
-```
-* Memcached (11212,11213,11214,11215)
-```shell script
-memcached -p 11212 -d
-```
-### Run tests
+### Step 3: Run tests
+In the same shell in which the source of environment variables was done, run the following command to run the tests.
 ```shell script
 ./node_modules/.bin/mocha --recursive "./test/*.js"
 ```
