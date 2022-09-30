@@ -104,6 +104,20 @@ function performTest(cacheObj) {
       response = await cacheObj.acquireLock(cKey, ttl);
       assert.equal(response.isSuccess(), false);
     });
+
+    it('should not be able to acquire lock for wrong ttl', async function() {
+      let cKey = 'cache-key-brl' + keySuffix,
+        ttl = 6.5, // seconds
+        response = await cacheObj.acquireLock(cKey, ttl);
+      assert.equal(response.isSuccess(), false);
+    });
+
+    it('should not be able to acquire lock if ttl is string', async function() {
+      let cKey = 'cache-key-brl' + keySuffix,
+        ttl = 'string', // seconds
+        response = await cacheObj.acquireLock(cKey, ttl);
+      assert.equal(response.isSuccess(), false);
+    });
   });
 }
 

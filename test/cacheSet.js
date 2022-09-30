@@ -140,6 +140,18 @@ function performTest(cacheObj, keySuffix) {
         assert.equal(response.data.response, null);
       }, ttl * 1000);
     });
+
+    it('should fail on giving wrong ttl', async function() {
+      let cKey = 'cache-key' + keySuffix,
+        cValue = 10,
+        ttl = 6.5,
+        response = await cacheObj.set(cKey, cValue, ttl);
+      if (engineType === 'none') {
+        assert.equal(response.isSuccess(), true);
+      } else {
+        assert.equal(response.isSuccess(), false);
+      }
+    });
   });
 }
 

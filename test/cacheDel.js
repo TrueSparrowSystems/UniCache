@@ -77,6 +77,15 @@ function performTest(cacheObj, keySuffix) {
       assert.equal(response.isSuccess(), true);
       assert.equal(response.data.response, true);
     });
+
+    it('should pass after deleting all keys', async function() {
+      let response = await cacheObj.delAll();
+      if (engineType === 'none') {
+        assert.equal(response.isSuccess(), false);
+      } else {
+        assert.equal(response.isSuccess(), true);
+      }
+    });
   });
 }
 

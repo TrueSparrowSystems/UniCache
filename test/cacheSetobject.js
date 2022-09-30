@@ -127,6 +127,17 @@ function performTest(cacheObj, keySuffix) {
       assert.equal(response.data.response, true);
     });
 
+    it('should fail when value is empty object for redis', async function() {
+      let cKey = 'cache-key-object' + keySuffix,
+        cValue = {},
+        response = await cacheObj.setObject(cKey, cValue);
+      if (engineType === 'redis') {
+        assert.equal(response.isSuccess(), false);
+      } else {
+        assert.equal(response.isSuccess(), true);
+      }
+    });
+
     it('should delete from cache after ttl (if cache engine is not redis)', async function() {
       let cKey = 'cache-key' + keySuffix,
         cValue = { a: 'a', b: [12, 23], c: true, d: 1 },
