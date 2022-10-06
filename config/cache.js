@@ -35,6 +35,7 @@ class CacheConfigHelper {
     oThis.REDIS_PORT = configStrategy.cache.port;
     oThis.REDIS_PASS = configStrategy.cache.password;
     oThis.REDIS_TLS_ENABLED = configStrategy.cache.enableTsl == '1';
+    oThis.REDIS_ENABLE_OFFLINE_QUEUE = configStrategy.cache.enable_offline_queue == false ? false : true;
     oThis.MEMCACHE_SERVERS = (configStrategy.cache.servers || []).map(Function.prototype.call, String.prototype.trim);
     oThis.DEBUG_ENABLED = configStrategy.DEBUG_ENABLED;
 

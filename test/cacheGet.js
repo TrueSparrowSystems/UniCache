@@ -13,6 +13,7 @@ let configStrategy3;
 if (testCachingEngine === 'redis') {
   configStrategy1 = require(rootPrefix + '/test/env/redis.json');
   configStrategy2 = require(rootPrefix + '/test/env/redis2.json');
+  configStrategy3 = require(rootPrefix + '/test/env/redis3.json');
 } else if (testCachingEngine === 'memcached') {
   configStrategy1 = require(rootPrefix + '/test/env/memcached.json');
   configStrategy2 = require(rootPrefix + '/test/env/memcached2.json');
@@ -192,12 +193,13 @@ function performMultipleTest(cacheObj1, cacheObj2, keySuffix) {
       assert.equal(response2.data.response, null);
     });
 
-    if (engineType == 'memcached') {
+    if (engineType === 'memcached') {
       let cache3 = Cache.getInstance(configStrategy3);
       let cacheImplementer3 = cache3.cacheInstance;
+      cacheImplementer3.client.reconnect = 100;
       it('should pass when server is not running', async function() {
-        let cKey = 'cache-key' + keySuffix;
-        response = await cacheImplementer3.get(cKey);
+        let cKey = 'cache-key' + keySuffix,
+          response = await cacheImplementer3.get(cKey);
         assert.equal(response.isSuccess(), false);
       }).timeout(6000);
     }

@@ -8,12 +8,15 @@ const rootPrefix = '..',
   testCachingEngine = process.env.TEST_CACHING_ENGINE;
 
 let configStrategy;
+let configStrategy3;
 if (testCachingEngine === 'redis') {
   configStrategy = require(rootPrefix + '/test/env/redis.json');
+  configStrategy3 = require(rootPrefix + '/test/env/redis3.json');
 } else if (testCachingEngine === 'memcached') {
   configStrategy = require(rootPrefix + '/test/env/memcached.json');
 } else if (testCachingEngine === 'none') {
   configStrategy = require(rootPrefix + '/test/env/inMemory.json');
+  configStrategy3 = require(rootPrefix + '/test/env/inMemory3.json');
 }
 
 const engineType = configStrategy.cache.engine;
@@ -133,6 +136,21 @@ function performTest(cacheObj, keySuffix) {
         assert.equal(resObj.data.response, cValue);
       }
     });
+
+    if (engineType !== 'memcached') {
+      let cache3 = Cache.getInstance(configStrategy3);
+      let cacheImplementer3 = cache3.cacheInstance;
+      it('should pass when server is not running', async function() {
+        let cKey = 'cache-key-incr-counterr' + keySuffix,
+          cValue = 5,
+          response = await cacheImplementer3.increment(cKey, cValue);
+        if (engineType === 'redis') {
+          assert.equal(response.isSuccess(), false);
+        } else {
+          assert.equal(response.isSuccess(), true);
+        }
+      });
+    }
   });
 }
 
