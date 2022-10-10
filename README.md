@@ -37,7 +37,7 @@ const PLGWorksCache = require('@plgworks/cache');
 const configStrategy = {
   cache: {
     engine: "none/redis/memcached",
-    // Other keys depend on the engine, refer next section for the same.
+    // Other keys depend on the engine, refer to the next section for the same.
   }
 };
 
