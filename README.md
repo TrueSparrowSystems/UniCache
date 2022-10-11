@@ -1,19 +1,19 @@
-# PLG Works Cache
+# UniCache by PLG Works
 
 [![Latest version](https://img.shields.io/npm/v/@plgworks/cache.svg?maxAge=3600)][npm]
 
 [npm]: https://www.npmjs.com/package/@plgworks/cache
 
-PLG Works Cache is a NPM package that provides a wrapper over caching engines - [Memcached](https://memcached.org/) 
+UniCache is a NPM package that provides a wrapper over caching engines - [Memcached](https://memcached.org/) 
 and [Redis](https://redis.io/docs/). Moreover, it provides in-memory caching functionality (utilizing memory on a machine).
 All these 3 flavours of caching engines are exposed implementing consistent interface and behaviour.
 
-## Why to use PLG Works Cache?
+## Why to use UniCache?
 Core packages of different caching systems do not have a common interface, i.e. they have the same functionality implemented with different method signatures.
 Moreover, they have differences in implementation behaviour too. Thus changing from one cache engine to another becomes difficult as all the usages need to be revisited.
-PLG Works Cache solves the problem by providing common wrapper methods for memcached, redis and in-memory caching engines.
+UniCache solves the problem by providing common wrapper methods for memcached, redis and in-memory caching engines.
 
-Also, you do not need to worry about breaking changes of the core packages between their major updates as PLG Works Cache will handle them.
+Also, you do not need to worry about breaking changes of the core packages between their major updates as UniCache will handle them.
 
 ## Prerequisites
 - [Node.js](https://nodejs.org/en/) (>= version 6)
@@ -29,10 +29,10 @@ npm install @plgworks/cache --save
 ```
 
 ## Initialize
-While using the package, create a singleton object of PLG Works Cache and then use it across the application. Example snippet for the PLG Works Cache singleton object is given below.
+While using the package, create a singleton object of UniCache and then use it across the application. Example snippet for the UniCache singleton object is given below.
 
 ```js
-const PLGWorksCache = require('@plgworks/cache');
+const UniCache = require('@plgworks/cache');
 
 const configStrategy = {
   cache: {
@@ -41,12 +41,12 @@ const configStrategy = {
   }
 };
 
-module.exports = PLGWorksCache.getInstance(configStrategy);
+module.exports = UniCache.getInstance(configStrategy);
 ```
 
 The singleton object can be used as given below. 
 ```js
-const cacheProvider = require('path-to-your-plg_works_cache-singleton-provider');
+const cacheProvider = require('path-to-your-uni-cache-singleton-provider');
 const cacheImplementer = cacheProvider.cacheInstance;
 
 cacheImplementer.set('testKey', 'testValue', 5000);
@@ -70,7 +70,7 @@ const configStrategy = {
 ```
 
 #### Redis Config Strategy
-Following is the redis engine config strategy to be used in initializing PLG Works Cache.
+Following is the redis engine config strategy to be used in initializing UniCache.
 ```js
 const configStrategy = {
   cache: {
@@ -93,7 +93,7 @@ const configStrategy = {
 - **consistentBehavior**: This field is required to create cache instance key.
 
 #### Memcache Config Strategy
-Following is the memcache engine config strategy to be used in initializing PLG Works Cache.
+Following is the memcache engine config strategy to be used in initializing UniCache.
 ```js
 const configStrategy = {
   cache: {
@@ -110,7 +110,7 @@ const configStrategy = {
 - **consistentBehavior**: This field is required to create cache instance key.
 
 #### In-Memory Config Strategy
-Following is the in-memory engine config strategy to be used in initializing PLG Works Cache.
+Following is the in-memory engine config strategy to be used in initializing UniCache.
 ```js
 const configStrategy = {
   cache: {
