@@ -4,14 +4,17 @@
 
 [npm]: https://www.npmjs.com/package/@plgworks/cache
 
-UniCache is a NPM package that provides a wrapper over caching engines - [Memcached](https://memcached.org/) 
-and [Redis](https://redis.io/docs/). Moreover, it provides in-memory caching functionality (utilizing memory on a machine).
-All these 3 flavours of caching engines are exposed implementing consistent interface and behaviour.
+UniCache is an NPM package that provides singleton interface and behavior for [Memcached](https://memcached.org/), [Redis](https://redis.io/docs/)   and
+In-memory caching. Easily interact or switch between
+them in minutes!
 
-## Why to use UniCache?
-Core packages of different caching systems do not have a common interface, i.e. they have the same functionality implemented with different method signatures.
-Moreover, they have differences in implementation behaviour too. Thus changing from one cache engine to another becomes difficult as all the usages need to be revisited.
-UniCache solves the problem by providing common wrapper methods for memcached, redis and in-memory caching engines.
+## Why UniCache?
+- UniCache abstracts the unnecessary deviations between the base packages, in turn helping you learn about and interact with 3 different caching engines all at once.
+- Singleton interface of UniCache is not only compatible with Memcached and Redis but also for In-Memory cache.
+- If your backend is interacting with multiple caching engines, UniCache helps developers to reduce translation layer for input and output - thus reducing development time and effort.
+- When using multiple caching engines simultaneously or want to switch between them, consistent output from UniCache will help in faster development. Even exceptions are given out consistently.
+- Be rest assured that your code will not need any further changes in order to use the upcoming base NPM package versions. UniCache will take care of it.
+- UniCache is thoroughly tested and is fully compatible with ElastiCache for Redis and ElastiCache for Memcached.
 
 Also, you do not need to worry about breaking changes of the core packages between their major updates as UniCache will handle them.
 
@@ -221,5 +224,5 @@ source test/env/inMemory.sh
 ### Step 3: Run tests
 In the same shell in which the source of environment variables was done, run the following command to run the tests.
 ```shell script
-./node_modules/.bin/mocha --recursive "./test/*.js"
+./node_modules/.bin/mocha --recursive "./test/*.js" --exit
 ```
