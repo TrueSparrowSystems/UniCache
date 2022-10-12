@@ -1,12 +1,10 @@
 {
-  "cache": {
-    "engine": "redis",
-    "host": "localhost",
-    "port": "6385",
-    "password": "my-secret",
-    "enableTsl": "0",
-    "defaultTtl": 60,
-    "consistentBehavior": "0",
-    "enable_offline_queue": false
-  }
+  "engine": "redis",
+  "host": "localhost",
+  "port": "6385",
+  "password": "my-secret",
+  "enableTsl": "0",
+  "defaultTtl": 60,
+  "consistentBehavior": "0",
+  "enable_offline_queue": false
 }

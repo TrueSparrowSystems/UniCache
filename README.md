@@ -38,10 +38,8 @@ While using the package, create a singleton object of UniCache and then use it a
 const UniCache = require('@plgworks/cache');
 
 const configStrategy = {
-  cache: {
-    engine: "none/redis/memcached",
-    // Other keys depend on the engine, refer to the next section for the same.
-  }
+  engine: "none/redis/memcached",
+  // Other keys depend on the engine, refer to the next section for the same.
 };
 
 module.exports = UniCache.getInstance(configStrategy);
@@ -65,10 +63,8 @@ Using the `engine` property, you can select which caching engine to use.
 An example of the configStrategy is:
 ```js
 const configStrategy = {
-  cache: {
     engine: "none/redis/memcached",
-    // other keys depend on the engine.
-  }
+  // other keys depend on the engine.
 };
 ```
 
@@ -76,15 +72,13 @@ const configStrategy = {
 Following is the redis engine config strategy to be used in initializing UniCache.
 ```js
 const configStrategy = {
-  cache: {
-    engine: "redis",
-    host: "localhost",
-    port: "6380",
-    password: "dsdsdsd",
-    enableTsl: "0",
-    defaultTtl: 36000,
-    consistentBehavior: "1"
-  }
+  engine: "redis",
+  host: "localhost",
+  port: "6380",
+  password: "dsdsdsd",
+  enableTsl: "0",
+  defaultTtl: 36000,
+  consistentBehavior: "1"
 }
 ````
 - **engine**: redis caching engine to be used. 
@@ -99,12 +93,10 @@ const configStrategy = {
 Following is the memcache engine config strategy to be used in initializing UniCache.
 ```js
 const configStrategy = {
-  cache: {
-    engine: "memcached",
-    servers: ["127.0.0.1:11211"],
-    defaultTtl: 36000,
-    consistentBehavior: "1"
-  }
+  engine: "memcached",
+  servers: ["127.0.0.1:11211"],
+  defaultTtl: 36000,
+  consistentBehavior: "1"
 }
 ````
 - **engine**: memcached caching engine to be used. 
@@ -116,12 +108,10 @@ const configStrategy = {
 Following is the in-memory engine config strategy to be used in initializing UniCache.
 ```js
 const configStrategy = {
-  cache: {
-    engine: "none",
-    namespace: "A",
-    defaultTtl: "36000",
-    consistentBehavior: "1"
-  }
+  engine: "none",
+  namespace: "A",
+  defaultTtl: "36000",
+  consistentBehavior: "1"
 }
 ```
 - **engine**: For in-memory cache engine parameter will be `none`. 

@@ -18,7 +18,7 @@ if (testCachingEngine === 'redis') {
   configStrategy = require(rootPrefix + '/test/env/inMemory.json');
 }
 
-const engineType = configStrategy.cache.engine;
+const engineType = configStrategy.engine;
 
 function performTest(cacheObj, keySuffix) {
   describe('Cache GetObject ' + keySuffix, function() {

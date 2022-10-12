@@ -19,7 +19,7 @@ if (testCachingEngine === 'redis') {
   configStrategy3 = require(rootPrefix + '/test/env/inMemory3.json');
 }
 
-const engineType = configStrategy.cache.engine;
+const engineType = configStrategy.engine;
 
 function performTest(cacheObj, keySuffix) {
   describe('Cache Increment ' + keySuffix, function() {

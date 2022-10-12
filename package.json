@@ -1,7 +1,7 @@
 {
-  "name": "@plgworks/cache",
+  "name": "@plgworks/unicache",
   "version": "1.0.3",
-  "description": "Cache is the central cache implementation for several modules.",
+  "description": "UniCache is an NPM package that provides singleton interface and behavior for Memcached, Redis and In-memory caching. Easily interact or switch between them in minutes!",
   "main": "index.js",
   "scripts": {
     "start": "index.js",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/PLG-Works/cache.git"
+    "url": "https://github.com/PLG-Works/UniCache.git"
   },
   "keywords": [
     "Cache",
@@ -21,9 +21,9 @@
   "author": "PLG Works",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/PLG-Works/cache/issues"
+    "url": "https://github.com/PLG-Works/UniCache/issues"
   },
-  "homepage": "https://github.com/PLG-Works/cache#readme",
+  "homepage": "https://github.com/PLG-Works/UniCache#readme",
   "dependencies": {
     "memcached": "2.2.2",
     "redis": "3.1.1",

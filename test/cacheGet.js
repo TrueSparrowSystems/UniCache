@@ -24,7 +24,7 @@ if (testCachingEngine === 'redis') {
   // Config strategies are same as they won't change for in-memory.
 }
 
-const engineType = configStrategy1.cache.engine;
+const engineType = configStrategy1.engine;
 
 function performTest(cacheObj, keySuffix) {
   describe('Cache Get ' + keySuffix, function() {

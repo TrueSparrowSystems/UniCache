@@ -1,8 +1,6 @@
 {
-  "cache": {
-    "engine": "none",
-    "namespace": "B",
-    "defaultTtl": "60",
-    "consistentBehavior": "1"
-  }
+  "engine": "none",
+  "namespace": "B",
+  "defaultTtl": "60",
+  "consistentBehavior": "1"
 }

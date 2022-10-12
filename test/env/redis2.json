@@ -1,11 +1,9 @@
 {
-  "cache": {
-    "engine": "redis",
-    "host": "localhost",
-    "port": "6381",
-    "password": "my-secret",
-    "enableTsl": "0",
-    "defaultTtl": 60,
-    "consistentBehavior": "1"
-  }
+  "engine": "redis",
+  "host": "localhost",
+  "port": "6381",
+  "password": "my-secret",
+  "enableTsl": "0",
+  "defaultTtl": 60,
+  "consistentBehavior": "1"
 }

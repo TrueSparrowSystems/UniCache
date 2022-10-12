@@ -45,16 +45,16 @@ const instanceMap = {};
  *
  */
 const getInstanceKey = function(configStrategy) {
-  if (!configStrategy.hasOwnProperty('cache') || !configStrategy.cache.hasOwnProperty('engine')) {
+  if (!configStrategy.hasOwnProperty('engine')) {
     throw 'CACHING_ENGINE parameter is missing.';
   }
-  if (configStrategy.cache.engine === undefined) {
+  if (configStrategy.engine === undefined) {
     throw 'CACHING_ENGINE parameter is empty.';
   }
 
   // Grab the required details from the configStrategy.
-  const cacheEngine = configStrategy.cache.engine.toString();
-  let isConsistentBehaviour = configStrategy.cache.consistentBehavior;
+  const cacheEngine = configStrategy.engine.toString();
+  let isConsistentBehaviour = configStrategy.consistentBehavior;
 
   // Sanitize isConsistentBehaviour
   isConsistentBehaviour = isConsistentBehaviour === undefined ? true : isConsistentBehaviour != '0';
@@ -68,30 +68,30 @@ const getInstanceKey = function(configStrategy) {
 
     // Check if all the mandatory connection parameters for Redis are available or not.
     for (let i = 0; i < redisMandatoryParams.length; i++) {
-      if (!configStrategy.cache.hasOwnProperty(redisMandatoryParams[i])) {
+      if (!configStrategy.hasOwnProperty(redisMandatoryParams[i])) {
         throw 'Redis - mandatory connection parameters missing.';
       }
-      if (configStrategy.cache[redisMandatoryParams[i]] === undefined) {
+      if (configStrategy[redisMandatoryParams[i]] === undefined) {
         throw 'Redis - connection parameters are empty.';
       }
     }
 
     endpointDetails =
-      configStrategy.cache.host.toLowerCase() +
+      configStrategy.host.toLowerCase() +
       '-' +
-      configStrategy.cache.port.toString() +
+      configStrategy.port.toString() +
       '-' +
-      configStrategy.cache.enableTsl.toString();
+      configStrategy.enableTsl.toString();
   } else if (cacheEngine == 'memcached') {
-    if (!configStrategy.cache.hasOwnProperty('servers')) {
+    if (!configStrategy.hasOwnProperty('servers')) {
       throw 'Memcached - mandatory connection parameters missing.';
     }
-    if (configStrategy.cache.servers === undefined) {
-      throw 'MEMCACHE_SERVERS(configStrategy.cache.servers) parameter is empty. ';
+    if (configStrategy.servers === undefined) {
+      throw 'MEMCACHE_SERVERS(configStrategy.servers) parameter is empty. ';
     }
-    endpointDetails = configStrategy.cache.servers.join(',').toLowerCase();
+    endpointDetails = configStrategy.servers.join(',').toLowerCase();
   } else {
-    endpointDetails = configStrategy.cache.namespace || '';
+    endpointDetails = configStrategy.namespace || '';
   }
 
   return cacheEngine + '-' + isConsistentBehaviour.toString() + '-' + endpointDetails;
