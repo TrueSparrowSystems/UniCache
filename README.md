@@ -1,7 +1,6 @@
 ![UniCache logo Dark](https://user-images.githubusercontent.com/7627517/195535780-47906a3b-c302-4c59-bb1e-d171914ff1bd.png)
 
-
-[![Latest version](https://img.shields.io/npm/v/@plgworks/unicache.svg?maxAge=3600)][npm]
+[![Latest version](https://img.shields.io/npm/v/@plgworks/cache.svg?maxAge=3600)][npm]
 
 [npm]: https://www.npmjs.com/package/@plgworks/unicache
 
