@@ -41,7 +41,7 @@ jobs:
           redis-port: 6381
           redis-container-name: redis-6381
       - name: Run In-Memory test cases
-        run: source test/env/inMemory.sh && nyc -no-clean mocha --exit --recursive "./test/*.js"
+        run: source test/env/inMemory.sh && mocha --exit
       - name: Run Redis test cases
         run: source test/env/redis.sh && nyc -no-clean mocha --exit --recursive "./test/*.js"
       - name: Aggregate test coverage
