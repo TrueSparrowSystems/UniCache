@@ -13,11 +13,13 @@
     "url": "https://github.com/PLG-Works/UniCache.git"
   },
   "keywords": [
-    "Cache",
+    "UniCache",
     "memcached",
     "redis",
     "in-memory",
-    "cache"
+    "dev-tools",
+    "opensource",
+    "caching"
   ],
   "author": "PLG Works",
   "license": "MIT",
