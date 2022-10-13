@@ -2,44 +2,43 @@
 
 [![Latest version](https://img.shields.io/npm/v/@plgworks/cache.svg?maxAge=3600)][npm]
 
-[npm]: https://www.npmjs.com/package/@plgworks/cache
+[npm]: https://www.npmjs.com/package/@plgworks/unicache
 
-UniCache is an NPM package that provides singleton interface and behavior for [Memcached](https://memcached.org/), [Redis](https://redis.io/docs/)   and
-In-memory caching. Easily interact or switch between
-them in minutes!
+UniCache is an NPM package that provides singleton interface and behavior for [Memcached](https://memcached.org/), [Redis](https://redis.io/docs/) and
+In-memory caching. Easily interact or switch between them in minutes!
 
 ## Why UniCache?
-- UniCache abstracts the unnecessary deviations between the base packages, in turn helping you learn about and interact with 3 different caching engines all at once.
+- UniCache abstracts the unnecessary deviations between the base packages, in turn helping you learn about and interact with 3 different caching engines (Memcached, Redis and In-memory) all at once.
 - Singleton interface of UniCache is not only compatible with Memcached and Redis but also for In-Memory cache.
 - If your backend is interacting with multiple caching engines, UniCache helps developers to reduce translation layer for input and output - thus reducing development time and effort.
 - When using multiple caching engines simultaneously or want to switch between them, consistent output from UniCache will help in faster development. Even exceptions are given out consistently.
 - Be rest assured that your code will not need any further changes in order to use the upcoming base NPM package versions. UniCache will take care of it.
-- UniCache is thoroughly tested and is fully compatible with ElastiCache for Redis and ElastiCache for Memcached.
-
-Also, you do not need to worry about breaking changes of the core packages between their major updates as UniCache will handle them.
+- UniCache is thoroughly tested and is fully compatible with AWS ElastiCache for Redis and AWS ElastiCache for Memcached.
 
 ## Prerequisites
 - [Node.js](https://nodejs.org/en/) (>= version 6)
 - [NPM](https://www.npmjs.com/package/npm)
 
-Follow the installation guides to get the caching engines up and running:
+Follow the installation guides to get the caching engines of your choice, up and running:
 - [Memcached installation guide](https://memcached.org/)
 - [Redis installation guide](https://redis.io/docs/getting-started/installation/)
 
 ## Install NPM
 ```shell script
-npm install @plgworks/cache --save
+npm install @plgworks/unicache --save
 ```
 
 ## Initialize
 While using the package, create a singleton object of UniCache and then use it across the application. Example snippet for the UniCache singleton object is given below.
 
 ```js
-const UniCache = require('@plgworks/cache');
+// Include the following snippet in a separate file, which can be required all accross the code to get unicache instance.
+// If using different caching engines simultaneously in a single codebase, have different files for each.
+const UniCache = require('@plgworks/unicache');
 
 const configStrategy = {
   engine: "none/redis/memcached",
-  // Other keys depend on the engine, refer to the next section for the same.
+  // Other keys depend on the engine, refer to the next section on Config Strategy, for the same.
 };
 
 module.exports = UniCache.getInstance(configStrategy);
@@ -57,7 +56,7 @@ cacheImplementer.get('testKey');
 **Note**: To print detailed logs, add `CACHE_DEBUG_ENABLED = '1'` in your env variables.
 
 ### Config Strategy
-**`configStrategy`** is a mandatory parameter which specifies the configuration strategy to be used for the cache engine.
+**`configStrategy`** is a mandatory parameter which specifies the configuration strategy to be used for the caching engine.
 Using the `engine` property, you can select which caching engine to use.
 
 An example of the configStrategy is:
@@ -215,4 +214,9 @@ source test/env/inMemory.sh
 In the same shell in which the source of environment variables was done, run the following command to run the tests.
 ```shell script
 ./node_modules/.bin/mocha --recursive "./test/*.js" --exit
+```
+
+For running tests for all the 3 caching engines, use the following command.
+```shell script
+source test/env/inMemory.sh && nyc --silent --no-clean mocha --exit  && source test/env/memcached.sh && nyc --silent --no-clean mocha --exit && source test/env/redis.sh && nyc --silent --no-clean mocha --exit && nyc report
 ```
