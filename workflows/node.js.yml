@@ -24,14 +24,25 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Install dependencies
         run: npm install
+      - name: Install NYC
+        run: npm install -g nyc
+      - name: Install Mocha
+        run: npm install -g mocha
       - name: Start Redis
         uses: supercharge/redis-github-action@1.4.0
         with:
           redis-version: ${{ matrix.redis-version }}
           redis-port: 6380
+          redis-container-name: redis-6380
       - name: Start Redis
         uses: supercharge/redis-github-action@1.4.0
         with:
           redis-version: ${{ matrix.redis-version }}
           redis-port: 6381
-      - run: source test/env/inMemory.sh && nyc --silent --no-clean ./node_modules/.bin/mocha --recursive "./test/*.js" --exit && source test/env/redis.sh && nyc --silent --no-clean ./node_modules/.bin/mocha --recursive "./test/*.js" --exit && nyc report
+          redis-container-name: redis-6381
+      - name: Run In-Memory test cases
+        run: source test/env/inMemory.sh && nyc -no-clean mocha --recursive "./test/*.js" --exit
+      - name: Run Redis test cases
+        run: source test/env/redis.sh && nyc -no-clean mocha --recursive "./test/*.js" --exit
+      - name: Aggregate test coverage
+        run: nyc report
