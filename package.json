@@ -6,7 +6,7 @@
   "scripts": {
     "start": "index.js",
     "pre-commit": "lint-staged",
-    "test": "source test/env/inMemory.sh && nyc --silent --no-clean ./node_modules/.bin/mocha --recursive \"./test/*.js\" --exit  && source test/env/memcached.sh && nyc --silent --no-clean ./node_modules/.bin/mocha --recursive \"./test/*.js\" --exit && source test/env/redis.sh && nyc --silent --no-clean ./node_modules/.bin/mocha --recursive \"./test/*.js\" --exit && nyc report"
+    "test": "source test/env/inMemory.sh && nyc --silent --no-clean mocha --exit  && source test/env/memcached.sh && nyc --silent --no-clean mocha --exit && source test/env/redis.sh && nyc --silent --no-clean mocha --exit && nyc report"
   },
   "repository": {
     "type": "git",
