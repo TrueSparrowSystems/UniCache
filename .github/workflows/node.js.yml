@@ -40,10 +40,8 @@ jobs:
           redis-version: ${{ matrix.redis-version }}
           redis-port: 6381
           redis-container-name: redis-6381
-      - name: Prep for In-Momory test cases
-        run: source test/env/inMemory.sh
       - name: Run In-Momory test cases
-        run: nyc -no-clean mocha --recursive "./test/*.js" --exit
+        run: source test/env/inMemory.sh && nyc -no-clean mocha --recursive "./test/*.js" --exit
       - name: Prep for Redis test cases
         run: source test/env/redis.sh
       - name: Run Redis test cases
