@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "index.js",
-    "pre-commit": "lint-staged",
-    "test": "source test/env/inMemory.sh && mocha --exit"
+    "pre-commit": "lint-staged"
   },
   "repository": {
     "type": "git",
