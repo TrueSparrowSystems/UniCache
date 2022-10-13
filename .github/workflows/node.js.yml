@@ -38,4 +38,6 @@ jobs:
           redis-version: ${{ matrix.redis-version }}
           redis-port: 6381
           redis-container-name: redis-6381
-      - run: source test/env/inMemory.sh && nyc --silent --no-clean ./node_modules/.bin/mocha --recursive "./test/*.js" --exit && source test/env/redis.sh && nyc --silent --no-clean ./node_modules/.bin/mocha --recursive "./test/*.js" --exit && nyc report
+      - run: source test/env/inMemory.sh && nyc --silent --no-clean ./node_modules/.bin/mocha --recursive "./test/*.js" --exit
+      - run: source test/env/redis.sh && nyc --silent --no-clean ./node_modules/.bin/mocha --recursive "./test/*.js" --exit
+      - run: nyc report
