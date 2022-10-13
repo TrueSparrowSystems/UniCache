@@ -43,10 +43,10 @@ jobs:
       - name: Prep for In-Momory test cases
         run: source test/env/inMemory.sh
       - name: Run In-Momory test cases
-        run: nyc --silent --no-clean mocha --recursive "./test/*.js" --exit
+        run: nyc -no-clean mocha --recursive "./test/*.js" --exit
       - name: Prep for Redis test cases
         run: source test/env/redis.sh
       - name: Run Redis test cases
-        run: nyc --silent --no-clean mocha test --exit
+        run: nyc --no-clean mocha --recursive "./test/*.js" --exit
       - name: Aggregate test coverage
         run: nyc report
