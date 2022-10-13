@@ -1,6 +1,6 @@
 {
   "engine": "memcached",
-  "servers": ["localhost:11212", "localhost:11213"],
+  "servers": ["localhost:11216"],
   "defaultTtl": 60,
   "consistentBehavior": "1"
 }

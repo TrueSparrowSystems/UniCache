@@ -32,9 +32,13 @@ class CacheInstance {
    * Constructor for cache instance.
    *
    * @param {object} configStrategy
-   * @param {object} configStrategy.cache
-   * @param {string} configStrategy.cache.engine
-   * @param {string/number} configStrategy.cache.consistentBehavior
+   * @param {string} configStrategy.engine
+   * @param {string/number} configStrategy.consistentBehavior
+   * @param {string} configStrategy.host
+   * @param {string/number} configStrategy.port
+   * @param {string/number} configStrategy.enableTsl
+   * @param {array<string>} [configStrategy.servers]
+   * @param {string} configStrategy.namespace
    * @param {object} instanceComposer
    *
    * @returns {cacheInstance}
@@ -43,13 +47,13 @@ class CacheInstance {
     const oThis = this;
 
     console.log('configStrategy', configStrategy);
-    if (configStrategy.cache.engine === undefined) {
+    if (configStrategy.engine === undefined) {
       throw new Error('CACHE_ENGINE parameter missing.');
     }
 
     // Grab the required details from the configStrategy.
-    oThis.cacheEngine = configStrategy.cache.engine;
-    oThis.isConsistentBehaviour = configStrategy.cache.consistentBehavior;
+    oThis.cacheEngine = configStrategy.engine;
+    oThis.isConsistentBehaviour = configStrategy.consistentBehavior;
 
     // Sanitize the isConsistentBehaviour variable.
     oThis.isConsistentBehaviour = oThis.isConsistentBehaviour == undefined ? true : oThis.isConsistentBehaviour != '0';
@@ -63,25 +67,25 @@ class CacheInstance {
 
       // Check if all the mandatory connection parameters for Redis are available or not.
       for (let key = 0; key < redisMandatoryParams.length; key++) {
-        if (!Object.prototype.hasOwnProperty.call(configStrategy.cache, redisMandatoryParams[key])) {
+        if (!Object.prototype.hasOwnProperty.call(configStrategy, redisMandatoryParams[key])) {
           throw new Error('Redis one or more mandatory connection parameters missing.');
         }
       }
 
       oThis.endpointDetails =
-        configStrategy.cache.host.toLowerCase() +
+        configStrategy.host.toLowerCase() +
         '-' +
-        configStrategy.cache.port.toString() +
+        configStrategy.port.toString() +
         '-' +
-        configStrategy.cache.enableTsl.toString();
+        configStrategy.enableTsl.toString();
     } else if (oThis.cacheEngine === 'memcached') {
-      if (!Object.prototype.hasOwnProperty.call(configStrategy.cache, 'servers')) {
+      if (!Object.prototype.hasOwnProperty.call(configStrategy, 'servers')) {
         throw new Error('Memcached mandatory connection parameters missing.');
       }
 
-      oThis.endpointDetails = configStrategy.cache.servers.join(',').toLowerCase();
+      oThis.endpointDetails = configStrategy.servers.join(',').toLowerCase();
     } else {
-      oThis.endpointDetails = `in-memory-${configStrategy.cache.namespace || ''}`;
+      oThis.endpointDetails = `in-memory-${configStrategy.namespace || ''}`;
     }
 
     return oThis.getInstance(instanceComposer);
