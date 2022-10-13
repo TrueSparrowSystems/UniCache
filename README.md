@@ -220,3 +220,8 @@ For running tests for all the 3 caching engines, use the following command.
 ```shell script
 source test/env/inMemory.sh && nyc --silent --no-clean mocha --exit  && source test/env/memcached.sh && nyc --silent --no-clean mocha --exit && source test/env/redis.sh && nyc --silent --no-clean mocha --exit && nyc report
 ```
+
+## Contribution
+We welcome more helping hands to make UniCache better. Feel free to report issues, raise PRs for fixes & enhancements.
+
+<p align="left">Built with :heart: by <a href="https://plgworks.com/" target="_blank">PLG Works</a></p>
