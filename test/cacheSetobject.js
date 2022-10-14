@@ -16,7 +16,7 @@ if (testCachingEngine === 'redis') {
   configStrategy = require(rootPrefix + '/test/env/inMemory.json');
 }
 
-const engineType = configStrategy.cache.engine;
+const engineType = configStrategy.engine;
 
 function performTest(cacheObj, keySuffix) {
   describe('Cache SetObject ' + keySuffix, function() {
@@ -125,6 +125,17 @@ function performTest(cacheObj, keySuffix) {
         response = await cacheObj.setObject(cKey, cValue);
       assert.equal(response.isSuccess(), true);
       assert.equal(response.data.response, true);
+    });
+
+    it('should fail when value is empty object for redis', async function() {
+      let cKey = 'cache-key-object' + keySuffix,
+        cValue = {},
+        response = await cacheObj.setObject(cKey, cValue);
+      if (engineType === 'redis') {
+        assert.equal(response.isSuccess(), false);
+      } else {
+        assert.equal(response.isSuccess(), true);
+      }
     });
 
     it('should delete from cache after ttl (if cache engine is not redis)', async function() {

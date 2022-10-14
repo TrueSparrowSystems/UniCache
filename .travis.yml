@@ -1,0 +1,37 @@
+dist: bionic
+language: node_js
+sudo: required
+branches:
+  only:
+    - master
+    - prep_for_ph_launch
+    - /^release-.*/
+notifications:
+  email:
+    recipients:
+      - kedar@plgworks.com
+    on_success: always
+    on_failure: always
+node_js:
+  - "18"
+  - "16"
+services:
+  - "memcached"
+before_install:
+  - sudo apt-get update
+  - sudo apt-get install nodejs
+  - sudo apt-get install npm
+install:
+  - npm install
+before_script:
+  - memcached -p 11212 -d
+  - memcached -p 11213 -d
+  - memcached -p 11214 -d
+  - memcached -p 11215 -d
+  - sudo redis-server /etc/redis/redis.conf --port 6380 --requirepass 'my-secret'
+  - sudo redis-server /etc/redis/redis.conf --port 6381 --requirepass 'my-secret'
+  - ps aux | grep 'memcached'
+  - ps aux | grep 'redis-server'
+script:
+  - npm run test
+after_script: "skip"

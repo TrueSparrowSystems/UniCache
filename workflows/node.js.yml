@@ -1,0 +1,48 @@
+name: UniCache CI
+
+on:
+  push:
+    branches: [ "prep_for_ph_launch" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x, 18.x]
+        redis-version: [6]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install dependencies
+        run: npm install
+      - name: Install NYC
+        run: npm install -g nyc
+      - name: Install Mocha
+        run: npm install -g mocha
+      - name: Start Redis
+        uses: supercharge/redis-github-action@1.4.0
+        with:
+          redis-version: ${{ matrix.redis-version }}
+          redis-port: 6380
+          redis-container-name: redis-6380
+      - name: Start Redis
+        uses: supercharge/redis-github-action@1.4.0
+        with:
+          redis-version: ${{ matrix.redis-version }}
+          redis-port: 6381
+          redis-container-name: redis-6381
+      - name: Run In-Memory test cases
+        run: source test/env/inMemory.sh && nyc -no-clean mocha --recursive "./test/*.js" --exit
+      - name: Run Redis test cases
+        run: source test/env/redis.sh && nyc -no-clean mocha --recursive "./test/*.js" --exit
+      - name: Aggregate test coverage
+        run: nyc report
