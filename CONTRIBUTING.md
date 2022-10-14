@@ -18,6 +18,8 @@ messages should detail why you made your change in addition to what you did (unl
 If you are enhancing with a new feature, please ensure to add appropriate test cases under `test/` folder. It's also a 
 good practice to add new test cases in case of bug fixes too.
 
+Please update CHANGELOG.md with each PR.
+
 If you are taking up a big change, please add an issue and discuss with the UniCache team first to get opinions from 
 multiple developers.
 
