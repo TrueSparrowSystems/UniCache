@@ -9,19 +9,22 @@ const rootPrefix = '..',
 
 let configStrategy1;
 let configStrategy2;
+let configStrategy3;
 if (testCachingEngine === 'redis') {
   configStrategy1 = require(rootPrefix + '/test/env/redis.json');
   configStrategy2 = require(rootPrefix + '/test/env/redis2.json');
+  configStrategy3 = require(rootPrefix + '/test/env/redis3.json');
 } else if (testCachingEngine === 'memcached') {
   configStrategy1 = require(rootPrefix + '/test/env/memcached.json');
   configStrategy2 = require(rootPrefix + '/test/env/memcached2.json');
+  configStrategy3 = require(rootPrefix + '/test/env/memcached3.json');
 } else if (testCachingEngine === 'none') {
   configStrategy1 = require(rootPrefix + '/test/env/inMemory.json');
   configStrategy2 = require(rootPrefix + '/test/env/inMemory2.json');
   // Config strategies are same as they won't change for in-memory.
 }
 
-const engineType = configStrategy1.cache.engine;
+const engineType = configStrategy1.engine;
 
 function performTest(cacheObj, keySuffix) {
   describe('Cache Get ' + keySuffix, function() {
@@ -189,6 +192,17 @@ function performMultipleTest(cacheObj1, cacheObj2, keySuffix) {
       assert.equal(response2.isSuccess(), true);
       assert.equal(response2.data.response, null);
     });
+
+    if (engineType === 'memcached') {
+      let cache3 = Cache.getInstance(configStrategy3);
+      let cacheImplementer3 = cache3.cacheInstance;
+      cacheImplementer3.client.reconnect = 100;
+      it('should pass when server is not running', async function() {
+        let cKey = 'cache-key' + keySuffix,
+          response = await cacheImplementer3.get(cKey);
+        assert.equal(response.isSuccess(), false);
+      }).timeout(6000);
+    }
   });
 }
 

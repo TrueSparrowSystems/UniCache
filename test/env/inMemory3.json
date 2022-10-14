@@ -2,5 +2,5 @@
   "engine": "none",
   "namespace": "B",
   "defaultTtl": "60",
-  "consistentBehavior": "1"
+  "consistentBehavior": "0"
 }
