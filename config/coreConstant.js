@@ -20,7 +20,7 @@ class CoreConstant {
    */
   get DEBUG_ENABLED() {
     // eslint-disable-next-line no-process-env
-    return process.env.CACHE_DEBUG_ENABLED;
+    return process.env.UNICACHE_DEBUG_ENABLED;
   }
 }
 
