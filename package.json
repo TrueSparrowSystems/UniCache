@@ -1,6 +1,6 @@
 {
   "name": "@plgworks/unicache",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0",
   "description": "UniCache is an NPM package that provides singleton interface and behavior for Memcached, Redis and In-memory caching. Easily interact or switch between them in minutes!",
   "main": "index.js",
   "scripts": {

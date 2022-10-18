@@ -4,7 +4,7 @@
 
 [npm]: https://www.npmjs.com/package/@plgworks/unicache
 
-UniCache is an NPM package that provides unified / singleton interface and behavior for [Memcached](https://memcached.org/), 
+UniCache is an open-source NPM package that provides unified / singleton interface and behavior for [Memcached](https://memcached.org/), 
 [Redis](https://redis.io/docs/) and In-memory caching. Easily interact or switch between them in minutes!
 
 ## Why UniCache?
