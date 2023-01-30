@@ -1,6 +1,6 @@
 {
-  "name": "@plgworks/unicache",
-  "version": "1.0.0",
+  "name": "@truesparrow/unicache",
+  "version": "2.0.0",
   "description": "UniCache is an NPM package that provides singleton interface and behavior for Memcached, Redis and In-memory caching. Easily interact or switch between them in minutes!",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/PLG-Works/UniCache.git"
+    "url": "https://github.com/TrueSparrowSystems/UniCache.git"
   },
   "keywords": [
     "UniCache",
@@ -21,16 +21,16 @@
     "opensource",
     "caching"
   ],
-  "author": "PLG Works",
+  "author": "True Sparrow",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/PLG-Works/UniCache/issues"
+    "url": "https://github.com/TrueSparrowSystems/UniCache/issues"
   },
-  "homepage": "https://github.com/PLG-Works/UniCache#readme",
+  "homepage": "https://github.com/TrueSparrowSystems/UniCache#readme",
   "dependencies": {
     "memcached": "2.2.2",
     "redis": "3.1.1",
-    "@plgworks/base": "^1.0.0"
+    "@truesparrow/base": "^2.0.0"
   },
   "devDependencies": {
     "chai": "4.3.0",
