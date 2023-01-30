@@ -1,9 +1,9 @@
 /**
- * Instance Composer from @TrueSparrowSystems/base
+ * Instance Composer from @truesparrow/base
  *
  * @module instance_composer
  */
 
-const Base = require('@TrueSparrowSystems/base');
+const Base = require('@truesparrow/base');
 
 module.exports = Base.InstanceComposer;

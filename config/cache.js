@@ -1,4 +1,4 @@
-const Base = require('@TrueSparrowSystems/base');
+const Base = require('@truesparrow/base');
 
 const rootPrefix = '..',
   coreConstants = require(rootPrefix + '/config/coreConstant');

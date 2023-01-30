@@ -1,8 +1,8 @@
 /**
- * Index File for @TrueSparrowSystems/cache
+ * Index File for @truesparrow/cache
  */
 
-const Base = require('@TrueSparrowSystems/base');
+const Base = require('@truesparrow/base');
 
 const rootPrefix = '.',
   version = require(rootPrefix + '/package.json').version,

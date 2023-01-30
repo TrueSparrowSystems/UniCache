@@ -4,7 +4,7 @@ Helping hands are always welcome to contribute with bug fixes and enhancements t
 which you observe while integrating UniCache in your project.
 
 ## How to Report Issues
-To report an issue, please use the [Github issues tracker](https://github.com/PLG-Works/UniCache/issues). When reporting issues,
+To report an issue, please use the [Github issues tracker](https://github.com/TrueSparrowSystems/UniCache/issues). When reporting issues,
 please mention the following details, whichever applicable:
 - Steps to reproduce with sample snippets.
 - Actual vs. expected behaviour.
