@@ -1,4 +1,6 @@
-![UniCache logo Dark](https://user-images.githubusercontent.com/7627517/195535780-47906a3b-c302-4c59-bb1e-d171914ff1bd.png)
+![UniCache logo Dark](https://user-images.githubusercontent.com/7627517/215476333-a8f05cb4-f785-4653-9be8-2fffc170edec.png)
+
+
 
 [![Latest version](https://img.shields.io/npm/v/@truesparrow/unicache.svg?maxAge=3600)][npm]
 
