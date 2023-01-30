@@ -1,5 +1,5 @@
 {
-  "name": "@plgworks/unicache",
+  "name": "@TrueSparrowSystems/unicache",
   "version": "1.0.0",
   "description": "UniCache is an NPM package that provides singleton interface and behavior for Memcached, Redis and In-memory caching. Easily interact or switch between them in minutes!",
   "main": "index.js",
@@ -30,7 +30,7 @@
   "dependencies": {
     "memcached": "2.2.2",
     "redis": "3.1.1",
-    "@plgworks/base": "^1.0.0"
+    "@TrueSparrowSystems/base": "^1.0.0"
   },
   "devDependencies": {
     "chai": "4.3.0",

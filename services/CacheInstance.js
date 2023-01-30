@@ -10,7 +10,7 @@
  * @module services/CacheInstance
  */
 
-const Base = require('@plgworks/base');
+const Base = require('@TrueSparrowSystems/base');
 
 const rootPrefix = '..',
   coreConstants = require(rootPrefix + '/config/coreConstant'),

@@ -1,9 +1,9 @@
 /**
- * Instance Composer from @plgworks/base
+ * Instance Composer from @TrueSparrowSystems/base
  *
  * @module instance_composer
  */
 
-const Base = require('@plgworks/base');
+const Base = require('@TrueSparrowSystems/base');
 
 module.exports = Base.InstanceComposer;

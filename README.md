@@ -1,8 +1,8 @@
 ![UniCache logo Dark](https://user-images.githubusercontent.com/7627517/195535780-47906a3b-c302-4c59-bb1e-d171914ff1bd.png)
 
-[![Latest version](https://img.shields.io/npm/v/@plgworks/unicache.svg?maxAge=3600)][npm]
+[![Latest version](https://img.shields.io/npm/v/@truesparrow/unicache.svg?maxAge=3600)][npm]
 
-[npm]: https://www.npmjs.com/package/@plgworks/unicache
+[npm]: https://www.npmjs.com/package/@truesparrow/unicache
 
 UniCache is an open-source NPM package that provides unified / singleton interface and behavior for [Memcached](https://memcached.org/), 
 [Redis](https://redis.io/docs/) and In-memory caching. Easily interact or switch between them in minutes!
@@ -29,7 +29,7 @@ Follow the installation guides to get the caching engines of your choice, up and
 
 ## Install NPM
 ```shell script
-npm install @plgworks/unicache --save
+npm install @truesparrow/unicache --save
 ```
 
 ## Initialize
@@ -39,7 +39,7 @@ Example snippet for the UniCache singleton object initialization is given below.
 ```js
 // Include the following snippet in a separate file, which can be required all accross the code to get unicache instance.
 // If using different caching engines simultaneously in a single codebase, have different files for each.
-const UniCache = require('@plgworks/unicache');
+const UniCache = require('@truesparrow/unicache');
 
 const configStrategy = {
   engine: "none/redis/memcached",
