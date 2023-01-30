@@ -1,3 +1,6 @@
+## UniCache v2.0.1
+- Logo change
+
 ## UniCache v2.0.0
 - Republished package under @truesparrow
 
